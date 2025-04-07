@@ -81,15 +81,34 @@
       gap: 20px;
       margin-top: 20px;
     }
+	.form-row {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* ラベルと入力の間隔 */
+}
+
+.form-row label {
+  width: 80px; /* ラベルの幅を固定（調整可） */
+}
+
+
   </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <h1>起床時間記録</h1>
   <form id="wake-form">
-    <label>日付: <input type="date" id="wake-date" required /></label>
-    <label>起床時間: <input type="time" id="wake-time" required /></label>
-    <button type="submit">記録</button>
+    <div class="form-row">
+  <label for="wake-date">日付:</label>
+  <input type="date" id="wake-date" required />
+</div>
+
+<div class="form-row">
+  <label for="wake-time">起床時間:</label>
+  <input type="time" id="wake-time" required />
+</div>
+
+<button type="submit">記録</button>
   </form>
 
   <h2>起床時間グラフ</h2>
