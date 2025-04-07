@@ -212,16 +212,23 @@
     }
 
     document.getElementById('wake-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const date = document.getElementById('wake-date').value;
-      const time = document.getElementById('wake-time').value;
+  event.preventDefault();
+  const date = document.getElementById('wake-date').value;
+  const time = document.getElementById('wake-time').value;
 
-      wakeData[date] = time;
-      localStorage.setItem('wakeData', JSON.stringify(wakeData));
-      updateTable();
-      document.getElementById('wake-form').reset();
-      document.getElementById('wake-date').value = new Date().toISOString().split('T')[0];
-    });
+  if (wakeData[date]) {
+    const confirmOverwrite = confirm("本日の記録を上書きします。よろしいですか？");
+    if (!confirmOverwrite) return;
+  }
+
+  wakeData[date] = time;
+  localStorage.setItem('wakeData', JSON.stringify(wakeData));
+  updateTable();
+  document.getElementById('wake-form').reset();
+  document.getElementById('wake-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('wake-time').value = new Date().toTimeString().slice(0,5);
+});
+
 
     document.getElementById('prevWeekBtn').addEventListener('click', function() {
       currentStartDate = getNextOrPrevStartDate(currentStartDate, -7);
