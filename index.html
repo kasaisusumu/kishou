@@ -182,37 +182,42 @@
       tension: 0.1
     }]
   },
-  options: {
-    plugins: {
-      tooltip: {
-        callbacks: {
-          label: function(context) {
-            const val = context.raw;
-            const hours = Math.floor(val);
-            const minutes = Math.round((val % 1) * 60);
-            const timeStr = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
-            return `起床時間: ${timeStr}`;
-          }
+ options: {
+  plugins: {
+    tooltip: {
+      callbacks: {
+        label: function(context) {
+          const val = context.raw;
+          const hours = Math.floor(val);
+          const minutes = Math.round((val % 1) * 60);
+          const timeStr = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+          return `起床時間: ${timeStr}`;
         }
       }
-    },
-    scales: {
-      y: {
-        beginAtZero: false,
-        title: {
-          display: true,
-          text: '時刻（時）'
-        },
-        ticks: {
-          callback: val => `${Math.floor(val)}:${String(Math.round((val % 1) * 60)).padStart(2, '0')}`
-        },
-        suggestedMin: 4,
-        suggestedMax: 10
-      }
-    },
-    responsive: true,
-    maintainAspectRatio: false
-  }
+    }
+  },
+  interaction: {
+    mode: 'index',
+    intersect: false
+  },
+  scales: {
+    y: {
+      beginAtZero: false,
+      title: {
+        display: true,
+        text: '時刻（時）'
+      },
+      ticks: {
+        callback: val => `${Math.floor(val)}:${String(Math.round((val % 1) * 60)).padStart(2, '0')}`
+      },
+      suggestedMin: 4,
+      suggestedMax: 10
+    }
+  },
+  responsive: true,
+  maintainAspectRatio: false
+}
+
 });
 
     }
